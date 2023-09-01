@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +25,7 @@ public class CategoryList extends HttpServlet {
 			"양식",
 			"문화예술"
 	};
-	
+
 	private class Feed {
 		private String feedName;
 		private String categoryName;
@@ -75,7 +74,7 @@ public class CategoryList extends HttpServlet {
 			return;
 		}
 		
-//		AtomicReference<String> responseData = new AtomicReference<String>("");
+//		AtomicReference<String> responseData = new AtomicReference<String>(""); 
 //		
 //		findFeedByCategory(categoryName).forEach(feed -> {
 //			responseData.set(responseData.get() + feed.getFeedInfo());
@@ -110,7 +109,6 @@ public class CategoryList extends HttpServlet {
 		
 		return feeds;
 	}
-
 }
 
 
