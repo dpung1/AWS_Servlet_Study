@@ -25,7 +25,9 @@ public class CorsFilter extends HttpFilter implements Filter {
 		httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,OPTIONS,DELETE");
 		httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
 		
-		chain.doFilter(request, response); // doFilter 기준으로 전처리, 후처리 > 응답
+		chain.doFilter(request, response); 
+		// HTTP > Filter > Servlet > Filter(전처리, 후처리 결정) > Server(TomCat)
+		// Servlet > Service > Repsitory > DB
 	}
 
 }

@@ -19,7 +19,6 @@ const SInputLayout = css`
 function Signup(props) {
     const navigate = useNavigate(); // 경로이동
 
-
     const [ signupUser, setSignupUser ] = useState({
         username: "",
         password: "",
@@ -27,7 +26,7 @@ function Signup(props) {
         email: ""
     });
 
-    const handleInputChange = (e) => {
+    const handleInputChange = async (e) => {
         setSignupUser({
             ...signupUser,
             [e.target.name]: e.target.value
@@ -41,17 +40,30 @@ function Signup(props) {
                 username: signupUser.username
             }
         }
-        axios.get("http://localhost:8080/servlet_study/auth/signup/duplicate/username", option)
-        .then((response) => {
-            axios.post("http://localhost:8080/servlet_study/auth/signup", signupUser) // axios는 자동으로 Json으로 변경해줌
-            .then((response) => {
-                alert(response.data);
-                navigate("/signin");
-            })
-        }).catch((error) => {
-            alert("중복된 아이디입니다.")
-        })
-    }
+
+        const signup = async () => {
+            // await 비동기 처리 안에서 비동기 처리를 동기 처리로 변경
+            let response = await axios.get("http://localhost:8080/servlet_study/auth/signup/duplicate/username", option)
+            
+            if(response.data) {
+                alert("중복된 아이디 입니다,")
+                return
+            }
+            
+            try {
+                response = await axios.post("http://localhost:8080/servlet_study/auth/signup", signupUser)
+                if(!response.data) {
+                    throw new Error(response);
+                }
+                alert("회원가입 성공!")
+                navigate("/signin")
+            }catch(error) {
+                console.log(error)
+            }
+        };
+
+        signup();
+    };
 
     return (
         <>
