@@ -6,6 +6,8 @@ import { Route, Routes } from 'react-router-dom';
 import Signup from './pages/Signup/Signup';
 import Asynchronous from './pages/Asynchronous/Asynchronous';
 import Signin from './pages/Signin/Signin';
+import Mypage from './pages/Mypage/Mypage';
+import EditProfile from './pages/EditProfile/EditProfile';
 
 const SCommon = css`
   * {
@@ -24,6 +26,8 @@ function App() {
           <Route path="/signin" element={ <Signin /> }/>
           <Route path="/signup" element={ <Signup /> }/>
           <Route path="/async" element= {<Asynchronous /> }/>
+          <Route path="/mypage" element= {<Mypage /> }/>
+          <Route path="/mypage/edit" element= {<EditProfile /> }/>
         </Routes>
       </MainLayout>
     </>
